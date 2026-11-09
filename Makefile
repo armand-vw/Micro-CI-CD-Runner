@@ -2,7 +2,7 @@ GO ?= go
 BINARY ?= bin/runner
 IMAGE ?= micro-ci-cd-runner:local
 
-.PHONY: all build run test test-race vet fmt tidy lint docker compose-up compose-down health clean
+.PHONY: all build run test test-race test-docker vet fmt tidy lint docker compose-up compose-down health clean
 
 all: fmt vet test build
 
@@ -18,6 +18,10 @@ test:
 # The race detector requires cgo and a C compiler.
 test-race:
 	CGO_ENABLED=1 $(GO) test -race ./...
+
+# Real container execution: image pull, clone, test, logs, cleanup.
+test-docker:
+	RUNNER_DOCKER_TEST=1 $(GO) test -tags=docker -run TestRunContainerEndToEnd -v ./internal/dockerx
 
 vet:
 	$(GO) vet ./...

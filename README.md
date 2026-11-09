@@ -211,9 +211,10 @@ Read [SECURITY.md](SECURITY.md) before exposing the runner to the internet.
 make tidy      # resolve modules
 make fmt       # gofmt
 make vet       # go vet
-make test      # go test ./...
-make test-race # race detector (requires a C compiler)
-make build     # build bin/runner
+make test        # go test ./...
+make test-race   # race detector (requires a C compiler)
+make test-docker # real Docker clone/test integration (requires Docker)
+make build       # build bin/runner
 make run       # run locally (requires Docker + .env)
 
 make docker    # build the container image

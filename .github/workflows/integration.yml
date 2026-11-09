@@ -1,0 +1,36 @@
+name: Integration
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: integration
+  cancel-in-progress: true
+
+jobs:
+  docker:
+    name: Docker end-to-end
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Docker daemon info
+        run: docker info
+
+      - name: Run Docker integration test
+        env:
+          RUNNER_DOCKER_TEST: "1"
+        run: go test -tags=docker -run TestRunContainerEndToEnd -v ./internal/dockerx
