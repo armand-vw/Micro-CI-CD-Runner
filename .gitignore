@@ -1,0 +1,27 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Runtime data
+/data/
+*.db
+*.db-shm
+*.db-wal
+
+# Build output
+/bin/
+/dist/
+/runner
+coverage.out
+coverage.html
+*.test
+*.prof
+
+# Tooling
+.idea/
+.vscode/
+*.swp
+.DS_Store

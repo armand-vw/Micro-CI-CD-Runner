@@ -1,0 +1,35 @@
+name: micro-ci-cd-runner
+
+services:
+  runner:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: micro-ci-cd-runner:local
+    container_name: microci-runner
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    environment:
+      DB_PATH: /data/runner.db
+      PROJECTS_FILE: /config/projects.yaml
+      DOCKER_HOST: unix:///var/run/docker.sock
+      PORT: "8080"
+    ports:
+      - "8080:8080"
+    volumes:
+      # The runner talks to the host daemon to start isolated build containers.
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner-data:/data
+      - ../config:/config:ro
+    healthcheck:
+      test: ["CMD", "/runner", "-healthcheck"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  runner-data:

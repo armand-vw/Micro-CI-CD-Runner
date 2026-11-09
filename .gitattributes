@@ -1,0 +1,12 @@
+* text=auto eol=lf
+
+*.go text diff=golang
+*.md text
+*.yml text
+*.yaml text
+*.json text
+*.svg text
+
+# Keep the embedded dashboard out of language statistics.
+web/** linguist-vendored
+web/** linguist-documentation

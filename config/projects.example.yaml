@@ -1,0 +1,12 @@
+# Copy this file to config/projects.yaml and adjust it for your repositories.
+#
+# The runner upserts projects by repo_url on startup, so editing this file and
+# restarting is enough to register or update a project. Projects removed from
+# the file are intentionally left in the database so build history is kept.
+projects:
+  - name: micro-ci-cd-runner
+    repo_url: https://github.com/armand-vw/Micro-CI-CD-Runner
+    branch: main
+    image: node:20-alpine
+    setup_command: apk add --no-cache git
+    test_command: npm ci && npm test

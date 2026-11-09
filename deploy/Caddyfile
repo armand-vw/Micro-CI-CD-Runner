@@ -1,0 +1,7 @@
+# Example reverse proxy with automatic HTTPS.
+# Replace ci.example.com with your domain, then run:
+#   caddy run --config deploy/Caddyfile
+ci.example.com {
+	encode zstd gzip
+	reverse_proxy runner:8080
+}

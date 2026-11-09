@@ -1,0 +1,12 @@
+# Projects the runner is allowed to build.
+#
+# This default entry builds the runner's own test suite on pushes to main.
+# Replace or extend it with your repositories. Projects are upserted by
+# repo_url on startup; removing an entry does not delete its build history.
+projects:
+  - name: micro-ci-cd-runner
+    repo_url: https://github.com/armand-vw/Micro-CI-CD-Runner
+    branch: main
+    image: golang:1.27-alpine
+    setup_command: apk add --no-cache git
+    test_command: CGO_ENABLED=0 go test ./...

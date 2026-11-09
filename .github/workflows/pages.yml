@@ -1,0 +1,47 @@
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      # Optional: set the repository variable RUNNER_API_URL to a public HTTPS
+      # URL of your runner to make the Pages dashboard live. Without it, the
+      # static build cannot reach a backend and shows empty data.
+      - name: Configure API base
+        run: |
+          api_base="${{ vars.RUNNER_API_URL }}"
+          printf 'window.RUNNER_CONFIG = { apiBase: "%s" };\n' "$api_base" > web/config.js
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload dashboard
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+
+      - name: Deploy to Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
