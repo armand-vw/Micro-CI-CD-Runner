@@ -9,6 +9,9 @@
   [![Go Version](https://img.shields.io/github/go-mod/go-version/armand-vw/Micro-CI-CD-Runner)](go.mod)
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
   [![Latest release](https://img.shields.io/github/v/release/armand-vw/Micro-CI-CD-Runner?sort=semver)](https://github.com/armand-vw/Micro-CI-CD-Runner/releases)
+  [![GitHub Pages](https://img.shields.io/badge/demo-GitHub%20Pages-2ea44f?logo=github)](https://armand-vw.github.io/Micro-CI-CD-Runner/)
+
+  <p><a href="https://armand-vw.github.io/Micro-CI-CD-Runner/"><strong>Live dashboard:</strong> https://armand-vw.github.io/Micro-CI-CD-Runner/</a></p>
 </div>
 
 ![Micro-CI/CD Runner](assets/social-preview.png)
@@ -184,10 +187,10 @@ no build step. It includes:
 - A build drawer with live logs, autoscroll, download, and retry.
 - Light/dark themes and a live-connection indicator.
 
-The same `web/` directory can be published to GitHub Pages as a static demo.
-Because GitHub Pages cannot run the backend, live data requires a publicly
-reachable runner, a configured `apiBase`, and CORS. See
-[docs/github-pages.md](docs/github-pages.md).
+A static build of the dashboard is published on
+[GitHub Pages](https://armand-vw.github.io/Micro-CI-CD-Runner/). Because GitHub
+Pages cannot run the backend, live data requires a publicly reachable runner, a
+configured `apiBase`, and CORS. See [docs/github-pages.md](docs/github-pages.md).
 
 ## Security highlights
 
@@ -231,8 +234,7 @@ Ideas and pull requests are welcome.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) and
-[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Security issues should follow
+Please read [CONTRIBUTING.md](CONTRIBUTING.md). Security issues should follow
 [SECURITY.md](SECURITY.md), not the public issue tracker.
 
 ## License
